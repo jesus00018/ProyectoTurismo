@@ -1,4 +1,61 @@
-public class Reserva{
+import java.time.LocalDate;
+
+public class Reserva {
+
+    private int idReserva;
+    private int codReserva;
+    private int cantidadPersonas;
+    private String estado;
+
+    private LocalDate fechaProgramacion;
+    private int idTour;
     
+    public int getIdReserva() {
+        return idReserva;
+    }
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
+    }
+    public int getCodReserva() {
+        return codReserva;
+    }
+    public void setCodReserva(int codReserva) {
+        this.codReserva = codReserva;
+    }
+    public int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+    public void setCantidadPersonas(int cantidadPersonas) {
+        this.cantidadPersonas = cantidadPersonas;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public LocalDate getFechaProgramacion() {
+        return fechaProgramacion;
+    }
+    public void setFechaProgramacion(LocalDate fechaProgramacion) {
+        this.fechaProgramacion = fechaProgramacion;
+    }
+    public int getIdTour() {
+        return idTour;
+    }
+    public void setIdTour(int idTour) {
+        this.idTour = idTour;
+    }
+    public Reserva(int idReserva, int codReserva, int cantidadPersonas, String estado, LocalDate fechaProgramacion,
+            int idTour) {
+        this.idReserva = idReserva;
+        this.codReserva = codReserva;
+        this.cantidadPersonas = cantidadPersonas;
+        this.estado = estado;
+        this.fechaProgramacion = fechaProgramacion;
+        this.idTour = idTour;
+    }
+
+
 
 }
