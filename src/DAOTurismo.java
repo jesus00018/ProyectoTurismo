@@ -17,7 +17,7 @@ public class DAOTurismo{
 		ResultSet rs = null;
 
 
-		// Se crea la consulta usando lenguaje SQL Estandar y almacenando en la variable query
+		
 		// t.* trae las 11 columnas de TOUR y a.nombre (columna 12) el nombre de la agencia
 		String query = "SELECT t.*, a.nombre "
 		             + "FROM TOUR t "
