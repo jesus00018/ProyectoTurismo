@@ -4,9 +4,7 @@ public class App {
 
         DAOReservaCliente dao = new DAOReservaCliente();
 
-        // Ejemplo: supone que en la base existen la reserva 1
-        // y los turistas 1 y 2 (con sus personas 1 y 2)
-        System.out.println("Clientes de la reserva 1:");
+        System.out.println("Clientes de la reserva :");
         for (Cliente c : dao.buscarClientesDeReserva(1)) {
             System.out.println("  " + c);
         }
