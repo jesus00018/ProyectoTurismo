@@ -6,20 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Maneja la relación muchos a muchos entre RESERVA y TURISTA (Cliente en Java),
- * guardada en la tabla RESERVA_TURISTA.
- *
- * Cada método cambia la base de datos Y las listas de los objetos,
- * así los dos quedan siempre iguales.
- *
- * Se usa PreparedStatement (en vez de Statement) porque las consultas
- * reciben valores (los ?), y así se evitan errores y la inyección SQL.
- *
- * Las columnas se leen por posición (1, 2, 3...) y no por nombre, porque
- * varias tienen tilde (género, dirección, patalogía, alergía) y eso suele
- * dar problemas con el driver. El orden es el de las tablas en tu diagrama.
- */
+
 public class DAOReservaCliente {
 
     // ==================== AGREGAR ====================
