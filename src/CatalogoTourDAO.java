@@ -58,7 +58,7 @@ public class CatalogoTourDAO {
 			}    
             
         } catch (SQLException e) {
-            System.err.println("Error al Consultar Turistas");
+            System.err.println("Error al consultar los tours");
             e.printStackTrace();
         }
         finally
