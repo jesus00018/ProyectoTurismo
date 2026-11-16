@@ -82,6 +82,6 @@ public class ComentariosTuristaDAO{
         	{
         		System.err.println("Error al consultar comentarios del turista");
         	}
-        }
+        } 
 	}
 }
