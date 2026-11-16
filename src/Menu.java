@@ -17,6 +17,13 @@ public class Menu{
             System.out.println("5. Lugares disponibles");
             System.out.println("6. Mostrar programaciones de las reservas");
             System.out.println("7. Salir");
+            System.out.print("Elija una opcion: ");
+
+            // Si se escribe algo que no es un numero, se descarta y se vuelve a pedir
+            while (!teclado.hasNextInt()) {
+                System.out.println("Ingrese un numero del 1 al 7");
+                teclado.next();
+            }
             opcion = teclado.nextInt();
         
             
@@ -31,6 +38,7 @@ public class Menu{
                         break;
                 case 3 :
                         System.out.println("Mostrando los tours");
+                        new DAOTurismo().imprimirListadoTurismo();
                         break;
                 case 4 :
                         System.out.println("Mostrando reservas");
@@ -49,6 +57,6 @@ public class Menu{
                 
 
             }
-        }  while(opcion !=0); 
+        }  while(opcion != 7); 
     }
 }
