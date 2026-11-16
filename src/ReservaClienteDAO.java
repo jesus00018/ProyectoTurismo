@@ -17,6 +17,7 @@ public class ReservaClienteDAO{
 		
 		// Se crea la consulta usando lenguaje SQL Estandar y almacenando en la variable query
 		String query = "";
+		
         //En este bloque se ejecutan las sentencias necesarias para acceder a la BD y obtener la informacion
         try {
         	// Instancio un objeto de acceso a datos
@@ -32,7 +33,8 @@ public class ReservaClienteDAO{
             // Procesa el resultSet y muestra la informacion obtenida desde la BD
             while(rs.next()){
 				System.out.println("------------------------------");
-               
+
+           
             		           
 			}    
             

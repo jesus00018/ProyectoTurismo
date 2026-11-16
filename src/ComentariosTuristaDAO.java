@@ -14,11 +14,8 @@ public class ComentariosTuristaDAO{
     	Connection con = null;
     	Statement sentencia = null;
 		ResultSet rs = null;
-
-
 		
-		String query = "USE PROY_TURISMO;\n" + //
-						"\n" + //
+		String query = 
 						"SELECT\n" + //
 						"    c.idCOMENTARIO AS idComentario,\n" + //
 						"    c.fecha AS FechaComentario,\n" + //
