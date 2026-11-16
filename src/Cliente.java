@@ -1,7 +1,7 @@
 
 public class Cliente extends Persona {
     private int idCliente;
-    private String patalogia;
+    private String patologia;
     private String incapacidad;
     private String alergia;
 
@@ -11,11 +11,11 @@ public class Cliente extends Persona {
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
-    public String getPatalogia() {
-        return patalogia;
+    public String getPatologia() {
+        return patologia;
     }
-    public void setPatalogia(String patalogia) {
-        this.patalogia = patalogia;
+    public void setPatologia(String patologia) {
+        this.patologia = patologia;
     }
     public String getIncapacidad() {
         return incapacidad;
@@ -31,11 +31,11 @@ public class Cliente extends Persona {
     }
     
     public Cliente(int idPersona, String nombre, String apellido, int dni, String email, String nacionalidad,
-            String provincia, String ciudad, String genero, String direccion, int idCliente, String patalogia,
+            String provincia, String ciudad, String genero, String direccion, int idCliente, String patologia,
             String incapacidad, String alergia) {
         super(idPersona, nombre, apellido, dni, email, nacionalidad, provincia, ciudad, genero, direccion);
         this.idCliente = idCliente;
-        this.patalogia = patalogia;
+        this.patologia = patologia;
         this.incapacidad = incapacidad;
         this.alergia = alergia;
     }
@@ -45,7 +45,7 @@ public class Cliente extends Persona {
         // Solo la cantidad de reservas, para no entrar en un bucle infinito
         // (la reserva imprime clientes y el cliente imprime reservas)
         return "Cliente{idCliente=" + idCliente + ", nombre=" + getNombre()
-                + ", apellido=" + getApellido() + ", patalogia=" + patalogia
+                + ", apellido=" + getApellido() + ", patologia=" + patologia
                 + ", incapacidad=" + incapacidad + ", alergia=" + alergia;
     }
 }
