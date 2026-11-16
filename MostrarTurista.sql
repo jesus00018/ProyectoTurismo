@@ -1,5 +1,4 @@
 use proy_turismo;
-/*1.Turistas ver sus datos personales*/
 SELECT 
     t.idTURISTA,
     p.nombre,

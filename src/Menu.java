@@ -38,7 +38,7 @@ public class Menu{
                         break;
                 case 3 :
                         System.out.println("Mostrando los tours");
-                        new DAOTurismo().imprimirListadoTurismo();
+                        //new DAOTurismo().imprimirListadoTurismo();
                         break;
                 case 4 :
                         System.out.println("Mostrando reservas");

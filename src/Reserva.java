@@ -1,6 +1,4 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Reserva {
 
@@ -8,32 +6,9 @@ public class Reserva {
     private int codReserva;
     private int cantidadPersonas;
     private String estado;
-
     private LocalDate fechaProgramacion;
     private int idTour;
 
-    // Relación muchos a muchos con Cliente (tabla RESERVA_TURISTA):
-    // una reserva puede tener muchos clientes
-    private List<Cliente> clientes = new ArrayList<>();
-
-    // Agrega el cliente a la reserva y la reserva al cliente (los dos lados)
-    public void agregarCliente(Cliente cliente) {
-        if (cliente != null && !clientes.contains(cliente)) {
-            clientes.add(cliente);
-            cliente.agregarReserva(this);
-        }
-    }
-
-    public void quitarCliente(Cliente cliente) {
-        if (clientes.remove(cliente)) {
-            cliente.quitarReserva(this);
-        }
-    }
-
-    // Devuelve una copia: la lista solo se cambia con agregar/quitar
-    public List<Cliente> getClientes() {
-        return new ArrayList<>(clientes);
-    }
 
     public int getIdReserva() {
         return idReserva;
@@ -83,14 +58,9 @@ public class Reserva {
 
     @Override
     public String toString() {
-        String nombres = "";
-        for (Cliente c : clientes) {
-            if (!nombres.isEmpty()) nombres += ", ";
-            nombres += c.getNombre() + " " + c.getApellido();
-        }
         return "Reserva{idReserva=" + idReserva + ", codReserva=" + codReserva
                 + ", cantidadPersonas=" + cantidadPersonas + ", estado=" + estado
-                + ", fechaProgramacion=" + fechaProgramacion + ", idTour=" + idTour
-                + ", clientes=[" + nombres + "]}";
+                + ", fechaProgramacion=" + fechaProgramacion + ", idTour=" + idTour;
+                
     }
 }
