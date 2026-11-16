@@ -19,6 +19,7 @@ public class Menu{
             System.out.println("7. Salir");
             opcion = teclado.nextInt();
         
+            
 
             switch(opcion){
 

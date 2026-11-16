@@ -2,9 +2,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-public class DAOTurismo{
 
-    public void imprimirListadoTurismo()
+public class ComentariosTuristaDAO{
+
+    public void mostrarComentariosTuristaDAO()
 	{
 	
        //Objeto para ejecutar la consulta en la base de datos
@@ -30,11 +31,12 @@ public class DAOTurismo{
             
             // Procesa el resultSet y muestra la informacion obtenida desde la BD
             while(rs.next()){
+				
             		           
 			}    
             
         } catch (SQLException e) {
-            System.err.println("Error al CARGAR DATOS");
+            System.err.println("Error al Consultar Turistas");
             e.printStackTrace();
         }
         finally
@@ -50,8 +52,9 @@ public class DAOTurismo{
         		
         	} catch (SQLException e)
         	{
-        		System.err.println("Error al cerrar conexion");
+        		System.err.println("Error al consultar comentarios del turista");
         	}
         }
 	}
 }
+
