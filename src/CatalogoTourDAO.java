@@ -40,7 +40,7 @@ public class CatalogoTourDAO {
             "ON t.idTOUR = pr.TOUR_idTOUR " +
 
             "LEFT JOIN RESERVA r " +
-            "ON r.PROGRAMACIÓN_RESERVA_idProgramacion = pr.idProgramacion " +
+            "ON r.`PROGRAMACIÓN_RESERVA_idProgramacion` = pr.idProgramacion " +
 
             "GROUP BY " +
             "pr.idProgramacion, " +
@@ -60,6 +60,9 @@ public class CatalogoTourDAO {
 
             // Obtener la conexión
             con = accesoBD.getConexion();
+
+            System.out.println("Base de datos utilizada por Java: " +
+            con.getCatalog());
             sentencia = con.createStatement();
 
             // Ejecutar la consulta

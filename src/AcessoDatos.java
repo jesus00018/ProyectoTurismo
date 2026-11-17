@@ -9,7 +9,7 @@ public class AcessoDatos{
 	private String  usuario     = "root";
 	private String  clave       = "Jeremias@2911";
 	private int puerto          = 3306;
-	private String bd			= "Turismo";
+	private String bd			= "Proy_Turismo";
 	private String  servidor    = "";
 	private Connection conexion = null;
 	 

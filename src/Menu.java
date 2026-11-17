@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Menu{
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
         CatalogoTourDAO catalogoTourDAO = new CatalogoTourDAO();
         EmpleadoRolAgenciaDAO empleadoRolAgenciaDAO = new EmpleadoRolAgenciaDAO();
         ComentariosTuristaDAO comentariosTuristaDAO = new ComentariosTuristaDAO();
@@ -22,12 +22,10 @@ public class Menu{
 
             // Si se escribe algo que no es un numero, se descarta y se vuelve a pedir
             while (!teclado.hasNextInt()) {
-                System.out.println("Ingrese un numero del 1 al 6");
+                System.out.println("Ingrese un numero del 1 al 5");
                 teclado.next();
             }
             opcion = teclado.nextInt();
-        
-            
 
             switch(opcion){
                
@@ -55,7 +53,7 @@ public class Menu{
                 
 
             }
-        }  while(opcion != 6);
+        }  while(opcion != 5);
         teclado.close(); 
     }
 }

@@ -30,13 +30,13 @@ SELECT
         ), 0
     ) AS cupos_disponibles
 
-FROM PROGRAMACIÓN_RESERVA pr
+FROM `PROGRAMACIÓN_RESERVA` pr
 
 INNER JOIN TOUR t
     ON t.idTOUR = pr.TOUR_idTOUR
 
 LEFT JOIN RESERVA r
-    ON r.PROGRAMACIÓN_RESERVA_idProgramacion = pr.idProgramacion
+    ON r.`PROGRAMACIÓN_RESERVA_idProgramacion`= pr.idProgramacion
 
 GROUP BY
     pr.idProgramacion,

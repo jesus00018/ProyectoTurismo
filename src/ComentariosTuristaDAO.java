@@ -1,87 +1,99 @@
+
 import java.sql.Connection;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class ComentariosTuristaDAO{
+public class ComentariosTuristaDAO {
 
-    // Muestra por consola todos los tours, con el nombre de la agencia que los ofrece
-    public void mostrarComentariosTurista()
-	{
+    public void mostrarComentariosTurista() {
 
-       //Objeto para ejecutar la consulta en la base de datos
-    	AcessoDatos accesoBD  = null;
-    	Connection con = null;
-    	Statement sentencia = null;
-		ResultSet rs = null;
-		
-		String query = 
-						"SELECT\n" + //
-						"    c.idCOMENTARIO AS idComentario,\n" + //
-						"    c.fecha AS FechaComentario,\n" + //
-						"    c.tipo AS TipoComentario,\n" + //
-						"    c.contenido AS ContenidoComentario,\n" + //
-						"    p.nombre AS NombreTurista,\n" + //
-						"    p.apellido AS ApellidoTurista,\n" + //
-						"    a.nombre AS NombreAgencia\n" + //
-						"\n" + //
-						"FROM COMENTARIO c\n" + //
-						"\n" + //
-						"INNER JOIN TURISTA t\n" + //
-						"    ON c.TURISTA_idTURISTA = t.idTURISTA\n" + //
-						"\n" + //
-						"INNER JOIN PERSONA p\n" + //
-						"    ON t.PERSONA_idPERSONA = p.idPERSONA\n" + //
-						"\n" + //
-						"INNER JOIN AGENCIA a\n" + //
-						"    ON c.AGENCIA_idAGENCIA = a.idAGENCIA\n" + //
-						"\n" + //
-						"ORDER BY c.fecha DESC;";
-        //En este bloque se ejecutan las sentencias necesarias para acceder a la BD y obtener la informacion
+        AcessoDatos accesoBD = null;
+        Connection con = null;
+        Statement sentencia = null;
+        ResultSet rs = null;
+
+        String query =
+            "SELECT " +
+            "c.idCOMENTARIO AS idComentario, " +
+            "c.fecha AS FechaComentario, " +
+            "c.tipo AS TipoComentario, " +
+            "c.contenido AS ContenidoComentario, " +
+            "p.nombre AS NombreTurista, " +
+            "p.apellido AS ApellidoTurista, " +
+            "a.nombre AS NombreAgencia " +
+
+            "FROM COMENTARIO c " +
+
+            "INNER JOIN TURISTA t " +
+            "ON c.TURISTA_idTURISTA = t.idTURISTA " +
+
+            "INNER JOIN PERSONA p " +
+            "ON t.PERSONA_idPERSONA = p.idPERSONA " +
+
+            "INNER JOIN AGENCIA a " +
+            "ON c.AGENCIA_idAGENCIA = a.idAGENCIA " +
+
+            "ORDER BY c.fecha DESC";
+
         try {
-        	// Instancio un objeto de acceso a datos
-        	accesoBD = new AcessoDatos();
 
-            //Obtener la conexion para poder generar la sentencia de consulta
+            accesoBD = new AcessoDatos();
+
             con = accesoBD.getConexion();
             sentencia = con.createStatement();
 
-            //Ejecuta la consulta y almacena el resultado en rs
-            rs  = sentencia.executeQuery(query);
+            rs = sentencia.executeQuery(query);
 
+            System.out.println("\n========== COMENTARIOS DE TURISTAS ==========");
 
-            // Procesa el resultSet y muestra la informacion obtenida desde la BD
-            // Se lee por posicion porque varias columnas tienen tilde
-            while(rs.next()){
-				System.out.println("-----------------------------------------------");
-				System.out.println("ID Comentario: " + rs.getInt("idCOMENTARIO"));
-				System.out.println("FechaComentario: " + rs.getString("fecha"));
-				System.out.println("TipoComentario: " + rs.getString("tipo"));
-				System.out.println("ContenidoComentario: " + rs.getString("contenido"));
-				System.out.println("NombreTurista: " + rs.getString("nombre"));
-				System.out.println("ApellidoTurista: " + rs.getString("apellido"));
-				System.out.println("NombreAgencia: " + rs.getString("nombre"));
-			}   
-            
+            while (rs.next()) {
+
+                System.out.println("-----------------------------------------------");
+
+                System.out.println("ID Comentario: " +
+                    rs.getInt("idComentario"));
+
+                System.out.println("Fecha: " +
+                    rs.getString("FechaComentario"));
+
+                System.out.println("Tipo: " +
+                    rs.getString("TipoComentario"));
+
+                System.out.println("Contenido: " +
+                    rs.getString("ContenidoComentario"));
+
+                System.out.println("Nombre Turista: " +
+                    rs.getString("NombreTurista"));
+
+                System.out.println("Apellido Turista: " +
+                    rs.getString("ApellidoTurista"));
+
+                System.out.println("Agencia: " +
+                    rs.getString("NombreAgencia"));
+            }
+
+            System.out.println("-----------------------------------------------");
+
         } catch (SQLException e) {
-            System.err.println("Error al consultar a los comentarios de los turistas hacia la agencia");
-            e.printStackTrace();
-        }
-        finally
-        {
-        	try
-        	{
-        		// Cierra el ResultSet
-        		if (rs!= null) rs.close();
-        		// Cierra la sentencia
-        		if (sentencia!= null) sentencia.close();
-        		// Cierra la conexion
-        		if (con != null) con.close();
 
-        	} catch (SQLException e)
-        	{
-        		System.err.println("Error al consultar comentarios del turista");
-        	}
-        } 
-	}
+            System.err.println("Error al consultar los comentarios: " +
+                e.getMessage());
+
+        } finally {
+
+            try {
+
+                if (rs != null) rs.close();
+                if (sentencia != null) sentencia.close();
+                if (con != null) con.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("Error al cerrar los recursos: " +
+                    e.getMessage());
+            }
+        }
+    }
 }
+
