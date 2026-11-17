@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Menu{
     public static void main(String[] args) {
         CatalogoTourDAO catalogoTourDAO = new CatalogoTourDAO();
+        ReservaClienteDAO reservaClienteDAO = new ReservaClienteDAO();
         EmpleadoRolAgenciaDAO empleadoRolAgenciaDAO = new EmpleadoRolAgenciaDAO();
         ComentariosTuristaDAO comentariosTuristaDAO = new ComentariosTuristaDAO();
 
@@ -35,7 +36,7 @@ public class Menu{
                         break;
                 case 2 :
                         System.out.println("Mostrando las reservas de los clientes");
-            
+                        reservaClienteDAO.mostrarReservaCliente();
                         break;
                 case 3 :
                         System.out.println("Mostrando los empleados");
