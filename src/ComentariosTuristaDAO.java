@@ -21,7 +21,8 @@ public class ComentariosTuristaDAO {
             "c.contenido AS ContenidoComentario, " +
             "p.nombre AS NombreTurista, " +
             "p.apellido AS ApellidoTurista, " +
-            "a.nombre AS NombreAgencia " +
+            "a.nombre AS NombreAgencia, " +
+            "tour.nombre AS NombreTour " +
 
             "FROM COMENTARIO c " +
 
@@ -33,6 +34,15 @@ public class ComentariosTuristaDAO {
 
             "INNER JOIN AGENCIA a " +
             "ON c.AGENCIA_idAGENCIA = a.idAGENCIA " +
+
+            "INNER JOIN RESERVA r " +
+            "ON r.TURISTA_TITULAR_idTURISTA = t.idTURISTA " +
+
+            "INNER JOIN PROGRAMACIÓN_RESERVA pr " +
+            "ON r.`PROGRAMACIÓN_RESERVA_idProgramacion` = pr.idProgramacion " +
+
+            "INNER JOIN TOUR tour " +
+            "ON pr.TOUR_idTOUR = tour.idTOUR " +
 
             "ORDER BY c.fecha DESC";
 
@@ -71,6 +81,9 @@ public class ComentariosTuristaDAO {
 
                 System.out.println("Agencia: " +
                     rs.getString("NombreAgencia"));
+
+                System.out.println("Tour realizado: " +
+                    rs.getString("NombreTour"));
             }
 
             System.out.println("-----------------------------------------------");
