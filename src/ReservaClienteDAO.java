@@ -16,40 +16,41 @@ public class ReservaClienteDAO{
 		
 		
 		// Se crea la consulta usando lenguaje SQL Estandar y almacenando en la variable query
-		String query = "SELECT\n" + //
-						"    r.idRESERVA AS ID_Reserva,\n" + //
-						"\n" + //
-						"    p.nombre AS Nombre_Turista,\n" + //
-						"    p.apellido AS Apellido_Turista,\n" + //
-						"    p.DNI AS DNI_Turista,\n" + //
-						"\n" + //
-						"    t.nombre AS Nombre_Tour,\n" + //
-						"    t.precio AS Precio_Por_Persona,\n" + //
-						"\n" + //
-						"    r.cantidad_personas AS Cantidad_Personas,\n" + //
-						"\n" + //
-						"    (t.precio * r.cantidad_personas) AS Precio_Total,\n" + //
-						"\n" + //
-						"    pr.fecha AS Fecha_Tour,\n" + //
-						"    pr.horario AS Horario_Tour,\n" + //
-						"\n" + //
-						"    r.estado AS Estado_Reserva\n" + //
-						"\n" + //
-						"FROM RESERVA r\n" + //
-						"\n" + //
-						"INNER JOIN TURISTA tu\n" + //
-						"    ON r.TURISTA_TITULAR_idTURISTA = tu.idTURISTA\n" + //
-						"\n" + //
-						"INNER JOIN PERSONA p\n" + //
-						"    ON tu.PERSONA_idPERSONA = p.idPERSONA\n" + //
-						"\n" + //
-						"INNER JOIN PROGRAMACIÓN_RESERVA pr\n" + //
-						"    ON r.`PROGRAMACIÓN_RESERVA_idProgramacion` = pr.idProgramacion\n" + //
-						"\n" + //
-						"INNER JOIN TOUR t\n" + //
-						"    ON pr.TOUR_idTOUR = t.idTOUR\n" + //
-						"\n" + //
-						"ORDER BY pr.fecha DESC, p.apellido;";
+		String query = "SELECT " +
+            "r.idRESERVA AS ID_Reserva, " +
+            "r.cod_reserva AS Codigo_Reserva, " +
+
+            "p.nombre AS Nombre_Turista, " +
+            "p.apellido AS Apellido_Turista, " +
+            "p.DNI AS DNI_Turista, " +
+
+            "t.nombre AS Nombre_Tour, " +
+            "t.precio AS Precio_Por_Persona, " +
+
+            "r.cantidad_personas AS Cantidad_Personas, " +
+
+            "(t.precio * r.cantidad_personas) AS Precio_Total, " +
+
+            "pr.fecha AS Fecha_Tour, " +
+            "pr.horario AS Horario_Tour, " +
+
+            "r.estado AS Estado_Reserva " +
+
+            "FROM RESERVA r " +
+
+            "INNER JOIN TURISTA tu " +
+            "ON r.TURISTA_TITULAR_idTURISTA = tu.idTURISTA " +
+
+            "INNER JOIN PERSONA p " +
+            "ON tu.PERSONA_idPERSONA = p.idPERSONA " +
+
+            "INNER JOIN PROGRAMACIÓN_RESERVA pr " +
+            "ON r.`PROGRAMACIÓN_RESERVA_idProgramacion` = pr.idProgramacion " +
+
+            "INNER JOIN TOUR t " +
+            "ON pr.TOUR_idTOUR = t.idTOUR " +
+
+            "ORDER BY pr.fecha DESC, p.apellido";;
 		
         //En este bloque se ejecutan las sentencias necesarias para acceder a la BD y obtener la informacion
         try {
@@ -66,11 +67,13 @@ public class ReservaClienteDAO{
             System.out.println("\n========== RESERVAS DE TURISTAS ==========");
 
             while (rs.next()) {
-
-                System.out.println("-----------------------------------------------");
+				 System.out.println("-----------------------------------------------");
 
                 System.out.println("ID Reserva: " +
                     rs.getInt("ID_Reserva"));
+
+                System.out.println("Código de reserva: " +
+                    rs.getString("Codigo_Reserva"));
 
                 System.out.println("Nombre del turista: " +
                     rs.getString("Nombre_Turista"));
@@ -101,6 +104,8 @@ public class ReservaClienteDAO{
 
                 System.out.println("Estado de la reserva: " +
                     rs.getString("Estado_Reserva"));
+
+				
             } 
             
         } catch (SQLException e) {

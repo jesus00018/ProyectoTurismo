@@ -2,6 +2,7 @@ USE PROY_TURISMO;
 
 SELECT
     r.idRESERVA AS ID_Reserva,
+    r.cod_reserva AS Codigo_Reserva,
 
     p.nombre AS Nombre_Turista,
     p.apellido AS Apellido_Turista,
