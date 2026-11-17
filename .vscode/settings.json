@@ -3,6 +3,6 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\Hernandez Facundo\\Universidad 2026\\POO\\TP_POO\\DAO tp6\\DAO_Ajedrez\\src\\mysql-connector-java-8.0.28.jar"
+        "src/mysql-connector-java-8.0.28.jar"
     ]
 }

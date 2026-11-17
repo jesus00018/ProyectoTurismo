@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Menu{
-    public static void MostrarMenu(){
+    public static void main(String[] args) throws Exception{
         CatalogoTourDAO catalogoTourDAO = new CatalogoTourDAO();
         EmpleadoRolAgenciaDAO empleadoRolAgenciaDAO = new EmpleadoRolAgenciaDAO();
         ComentariosTuristaDAO comentariosTuristaDAO = new ComentariosTuristaDAO();

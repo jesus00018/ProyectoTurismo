@@ -1,3 +1,4 @@
+
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -20,8 +21,18 @@ public class CatalogoTourDAO {
             "pr.fecha AS fecha, " +
             "pr.horario AS horario, " +
             "pr.cupo_maximo AS cupo_maximo, " +
-            "COALESCE(SUM(r.cantidad_personas), 0) AS cupos_ocupados, " +
-            "pr.cupo_maximo - COALESCE(SUM(r.cantidad_personas), 0) AS cupos_disponibles " +
+
+            "COALESCE(SUM(CASE " +
+            "WHEN r.idRESERVA IS NOT NULL " +
+            "AND r.estado <> 'CANCELADA' " +
+            "THEN r.cantidad_personas " +
+            "ELSE 0 END), 0) AS cupos_reservados, " +
+
+            "pr.cupo_maximo - COALESCE(SUM(CASE " +
+            "WHEN r.idRESERVA IS NOT NULL " +
+            "AND r.estado <> 'CANCELADA' " +
+            "THEN r.cantidad_personas " +
+            "ELSE 0 END), 0) AS cupos_disponibles " +
 
             "FROM PROGRAMACIÓN_RESERVA pr " +
 
@@ -30,7 +41,6 @@ public class CatalogoTourDAO {
 
             "LEFT JOIN RESERVA r " +
             "ON r.PROGRAMACIÓN_RESERVA_idProgramacion = pr.idProgramacion " +
-            "AND r.estado <> 'Cancelada' " +
 
             "GROUP BY " +
             "pr.idProgramacion, " +
@@ -41,20 +51,20 @@ public class CatalogoTourDAO {
             "pr.horario, " +
             "pr.cupo_maximo " +
 
-            "ORDER BY pr.fecha, pr.horario";
+            "ORDER BY t.nombre, pr.fecha, pr.horario";
 
         try {
 
             // Instancio un objeto de acceso a datos
-        	accesoBD = new AcessoDatos();
+            accesoBD = new AcessoDatos();
 
-            //Obtener la conexion para poder generar la sentencia de consulta
+            // Obtener la conexión
             con = accesoBD.getConexion();
             sentencia = con.createStatement();
 
-            //Ejecuta la consulta y almacena el resultado en rs
-            rs  = sentencia.executeQuery(query);
-            
+            // Ejecutar la consulta
+            rs = sentencia.executeQuery(query);
+
             System.out.println("\n========== CATÁLOGO DE TOURS ==========");
 
             while (rs.next()) {
@@ -79,8 +89,8 @@ public class CatalogoTourDAO {
                 System.out.println("Cupo máximo: " +
                     rs.getInt("cupo_maximo"));
 
-                System.out.println("Cupos ocupados: " +
-                    rs.getInt("cupos_ocupados"));
+                System.out.println("Cupos reservados: " +
+                    rs.getInt("cupos_reservados"));
 
                 System.out.println("Cupos disponibles: " +
                     rs.getInt("cupos_disponibles"));
@@ -97,21 +107,19 @@ public class CatalogoTourDAO {
 
             try {
 
-                if (rs != null) {
-                    rs.close();
-                }
+                // Cerrar ResultSet
+                if (rs != null) rs.close();
 
-                if (sentencia != null) {
-                    sentencia.close();
-                }
+                // Cerrar sentencia
+                if (sentencia != null) sentencia.close();
 
-                if (con != null) {
-                    con.close();
-                }
+                // Cerrar conexión
+                if (con != null) con.close();
 
             } catch (SQLException e) {
 
-                System.out.println("Error al cerrar la conexión: " +
+                System.err.println(
+                    "Error al cerrar el catálogo de tours: " +
                     e.getMessage());
             }
         }
