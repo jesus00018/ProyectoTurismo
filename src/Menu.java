@@ -60,7 +60,7 @@ public class Menu{
                 
 
             }
-        }  while(opcion != 5);
+        }  while(opcion != 6);
         teclado.close(); 
     }
 }
