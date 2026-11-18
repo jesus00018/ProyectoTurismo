@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -129,4 +130,27 @@ public class ReservaClienteDAO{
         	}
         }
 	}
+    public void cancelarReserva(int codReserva) {
+    String query = "UPDATE RESERVA SET estado = 'CANCELADA' WHERE cod_reserva = ?";
+    AcessoDatos accesoBD = null;
+    Connection con = null;
+    PreparedStatement sentencia = null;
+    try {
+        accesoBD = new AcessoDatos();
+        con = accesoBD.getConexion();
+        sentencia = con.prepareStatement(query);
+        sentencia.setInt(1, codReserva);
+        int filas = sentencia.executeUpdate();
+        System.out.println(filas > 0 ? "Reserva cancelada." : "No existe esa reserva.");
+    } catch (SQLException e) {
+        System.err.println("Error al cancelar la reserva: " + e.getMessage());
+    } finally {
+        try {
+            if (sentencia != null) sentencia.close();
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            System.err.println("Error al cerrar conexion");
+        }
+    }
+}
 }

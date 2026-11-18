@@ -20,12 +20,13 @@ public class Menu{
             System.out.println("3. Empleados con su rol ");
             System.out.println("4. Tour más solicitados");
             System.out.println("5. Comentarios de los turistas");
-            System.out.println("6. Salir");
+            System.out.println("6. Cancelar una reserva");
+            System.out.println("7. Salir");
             System.out.print("Elija una opcion: ");
 
             // Si se escribe algo que no es un numero, se descarta y se vuelve a pedir
             while (!teclado.hasNextInt()) {
-                System.out.println("Ingrese un numero del 1 al 6");
+                System.out.println("Ingrese un numero del 1 al 7");
                 teclado.next();
             }
             opcion = teclado.nextInt();
@@ -53,6 +54,10 @@ public class Menu{
                         comentariosTuristaDAO.mostrarComentariosTurista();
                         break;
                 case 6 :
+                        System.out.print("Código de la reserva a cancelar: ");
+                        reservaClienteDAO.cancelarReserva(teclado.nextInt());
+                        break;
+                case 7 :
                         System.out.println("Saliendo del sistema");
                         break;
                 default:
@@ -60,7 +65,7 @@ public class Menu{
                 
 
             }
-        }  while(opcion != 6);
+        }  while(opcion != 7);
         teclado.close(); 
     }
 }
