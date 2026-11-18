@@ -12,9 +12,9 @@ public class Menu{
         int opcion;
 
         do{
-            System.out.println("\n ==========================================");
-            System.out.println("        SISTEMA DE TURISMO                  ");
-            System.out.println(" ==========================================");
+            System.out.println("\n ========================================== ");
+            System.out.println("        SISTEMA DE TURISMO                   ");
+            System.out.println(" ========================================== ");
             System.out.println("1. Catalogos de Tours ");
             System.out.println("2. Reservas de los turistas ");
             System.out.println("3. Empleados con su rol ");
