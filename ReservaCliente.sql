@@ -1,3 +1,4 @@
+
 USE PROY_TURISMO;
 
 SELECT
@@ -18,6 +19,9 @@ SELECT
     pr.fecha AS Fecha_Tour,
     pr.horario AS Horario_Tour,
 
+    pg.nombre AS Nombre_Guia,
+    pg.apellido AS Apellido_Guia,
+
     r.estado AS Estado_Reserva
 
 FROM RESERVA r
@@ -33,5 +37,12 @@ INNER JOIN PROGRAMACIÓN_RESERVA pr
 
 INNER JOIN TOUR t
     ON pr.TOUR_idTOUR = t.idTOUR
+
+INNER JOIN EMPLEADO e
+    ON pr.EMPLEADO_idEMPLEADO = e.idEMPLEADO
+    AND pr.EMPLEADO_PERSONA_idPERSONA = e.PERSONA_idPERSONA
+
+INNER JOIN PERSONA pg
+    ON e.PERSONA_idPERSONA = pg.idPERSONA
 
 ORDER BY pr.fecha DESC, p.apellido;

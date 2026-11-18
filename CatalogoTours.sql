@@ -3,6 +3,7 @@ USE PROY_TURISMO;
 SELECT
     t.idTOUR AS id_tour,
     t.nombre AS nombre_tour,
+    a.nombre AS nombre_agencia,
     t.precio AS precio,
     pr.fecha AS fecha,
     pr.horario AS horario,
@@ -35,13 +36,17 @@ FROM `PROGRAMACIÓN_RESERVA` pr
 INNER JOIN TOUR t
     ON t.idTOUR = pr.TOUR_idTOUR
 
+INNER JOIN AGENCIA a
+    ON t.AGENCIA_idAGENCIA = a.idAGENCIA
+
 LEFT JOIN RESERVA r
-    ON r.`PROGRAMACIÓN_RESERVA_idProgramacion`= pr.idProgramacion
+    ON r.`PROGRAMACIÓN_RESERVA_idProgramacion` = pr.idProgramacion
 
 GROUP BY
     pr.idProgramacion,
     t.idTOUR,
     t.nombre,
+    a.nombre,
     t.precio,
     pr.fecha,
     pr.horario,

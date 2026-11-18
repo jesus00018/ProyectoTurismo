@@ -1,16 +1,17 @@
 
-public class Cliente extends Persona {
-    private int idCliente;
+public class Turista extends Persona {
+    private int idTurista;
     private String patologia;
     private String incapacidad;
     private String alergia;
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getIdTurista() {
+        return idTurista;
     }
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setIdTurista(int idTurista) {
+        this.idTurista = idTurista;
     }
+    
     public String getPatologia() {
         return patologia;
     }
@@ -30,11 +31,12 @@ public class Cliente extends Persona {
         this.alergia = alergia;
     }
     
-    public Cliente(int idPersona, String nombre, String apellido, int dni, String email, String nacionalidad,
-            String provincia, String ciudad, String genero, String direccion, int idCliente, String patologia,
+   
+    public Turista(int idPersona, String nombre, String apellido, int dni, String email, String nacionalidad,
+            String provincia, String ciudad, String genero, String direccion, int idTurista, String patologia,
             String incapacidad, String alergia) {
         super(idPersona, nombre, apellido, dni, email, nacionalidad, provincia, ciudad, genero, direccion);
-        this.idCliente = idCliente;
+        this.idTurista = idTurista;
         this.patologia = patologia;
         this.incapacidad = incapacidad;
         this.alergia = alergia;
@@ -44,8 +46,10 @@ public class Cliente extends Persona {
     public String toString() {
         // Solo la cantidad de reservas, para no entrar en un bucle infinito
         // (la reserva imprime clientes y el cliente imprime reservas)
-        return "Cliente{idCliente=" + idCliente + ", nombre=" + getNombre()
+        return "Turista{idTurista=" + idTurista + ", nombre=" + getNombre()
                 + ", apellido=" + getApellido() + ", patologia=" + patologia
                 + ", incapacidad=" + incapacidad + ", alergia=" + alergia;
     }
+    
+    
 }
