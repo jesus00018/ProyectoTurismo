@@ -17,6 +17,7 @@ public class CatalogoTourDAO {
             "SELECT " +
             "t.idTOUR AS id_tour, " +
             "t.nombre AS nombre_tour, " +
+            "a.nombre AS nombre_agencia, " +
             "t.precio AS precio, " +
             "pr.fecha AS fecha, " +
             "pr.horario AS horario, " +
@@ -39,6 +40,9 @@ public class CatalogoTourDAO {
             "INNER JOIN TOUR t " +
             "ON t.idTOUR = pr.TOUR_idTOUR " +
 
+            "INNER JOIN AGENCIA a " +
+            "ON t.AGENCIA_idAGENCIA = a.idAGENCIA " +
+
             "LEFT JOIN RESERVA r " +
             "ON r.`PROGRAMACIÓN_RESERVA_idProgramacion` = pr.idProgramacion " +
 
@@ -46,6 +50,7 @@ public class CatalogoTourDAO {
             "pr.idProgramacion, " +
             "t.idTOUR, " +
             "t.nombre, " +
+            "a.nombre, " +
             "t.precio, " +
             "pr.fecha, " +
             "pr.horario, " +
@@ -62,7 +67,8 @@ public class CatalogoTourDAO {
             con = accesoBD.getConexion();
 
             System.out.println("Base de datos utilizada por Java: " +
-            con.getCatalog());
+                con.getCatalog());
+
             sentencia = con.createStatement();
 
             // Ejecutar la consulta
@@ -70,7 +76,11 @@ public class CatalogoTourDAO {
 
             System.out.println("\n========== CATÁLOGO DE TOURS ==========");
 
+            boolean hayResultados = false;
+
             while (rs.next()) {
+
+                hayResultados = true;
 
                 System.out.println("--------------------------------------");
 
@@ -79,6 +89,9 @@ public class CatalogoTourDAO {
 
                 System.out.println("Nombre del tour: " +
                     rs.getString("nombre_tour"));
+
+                System.out.println("Agencia: " +
+                    rs.getString("nombre_agencia"));
 
                 System.out.println("Precio: $" +
                     rs.getBigDecimal("precio"));
@@ -97,6 +110,10 @@ public class CatalogoTourDAO {
 
                 System.out.println("Cupos disponibles: " +
                     rs.getInt("cupos_disponibles"));
+            }
+
+            if (!hayResultados) {
+                System.out.println("No hay tours programados.");
             }
 
             System.out.println("--------------------------------------");
@@ -128,3 +145,4 @@ public class CatalogoTourDAO {
         }
     }
 }
+

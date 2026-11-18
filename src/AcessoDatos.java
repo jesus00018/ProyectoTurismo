@@ -39,7 +39,7 @@ public class AcessoDatos{
 	            e.printStackTrace();
 	            System.exit(0); //parar la ejecuci�n
 	        }
-	        System.out.println("Conectado a Turismo");
+	        
 	    }
 	 
 	    //Devuelve el objeto Connection que se usar� en la clase Controlador

@@ -1,22 +1,21 @@
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ReservaClienteDAO{
+public class ReservaClienteDAO {
 
-    public void mostrarReservaCliente()
-	{
-	
-       //Objeto para ejecutar la consulta en la base de datos
-    	AcessoDatos accesoBD  = null;
-    	Connection con = null;
-    	Statement sentencia = null;
-		ResultSet rs = null;
-		
-		
-		// Se crea la consulta usando lenguaje SQL Estandar y almacenando en la variable query
-		String query = "SELECT " +
+    public void mostrarReservaCliente() {
+
+        // Objeto para ejecutar la consulta en la base de datos
+        AcessoDatos accesoBD = null;
+        Connection con = null;
+        Statement sentencia = null;
+        ResultSet rs = null;
+
+        // Consulta SQL
+        String query = "SELECT " +
             "r.idRESERVA AS ID_Reserva, " +
             "r.cod_reserva AS Codigo_Reserva, " +
 
@@ -34,6 +33,9 @@ public class ReservaClienteDAO{
             "pr.fecha AS Fecha_Tour, " +
             "pr.horario AS Horario_Tour, " +
 
+            "pg.nombre AS Nombre_Guia, " +
+            "pg.apellido AS Apellido_Guia, " +
+
             "r.estado AS Estado_Reserva " +
 
             "FROM RESERVA r " +
@@ -50,24 +52,38 @@ public class ReservaClienteDAO{
             "INNER JOIN TOUR t " +
             "ON pr.TOUR_idTOUR = t.idTOUR " +
 
-            "ORDER BY pr.fecha DESC, p.apellido";;
-		
-        //En este bloque se ejecutan las sentencias necesarias para acceder a la BD y obtener la informacion
+            "INNER JOIN EMPLEADO e " +
+            "ON pr.EMPLEADO_idEMPLEADO = e.idEMPLEADO " +
+            "AND pr.EMPLEADO_PERSONA_idPERSONA = e.PERSONA_idPERSONA " +
+
+            "INNER JOIN PERSONA pg " +
+            "ON e.PERSONA_idPERSONA = pg.idPERSONA " +
+
+            "ORDER BY pr.fecha DESC, p.apellido";
+
+        // Ejecutar la consulta y obtener la información
         try {
-        	// Instancio un objeto de acceso a datos
-        	accesoBD = new AcessoDatos();
-			
-            //Obtener la conexion para poder generar la sentencia de consulta
+
+            // Instancio un objeto de acceso a datos
+            accesoBD = new AcessoDatos();
+
+            // Obtener la conexión
             con = accesoBD.getConexion();
+
             sentencia = con.createStatement();
-            
-            //Ejecuta la consulta y almacena el resultado en rs
-            rs  = sentencia.executeQuery(query);
-            
+
+            // Ejecutar la consulta
+            rs = sentencia.executeQuery(query);
+
             System.out.println("\n========== RESERVAS DE TURISTAS ==========");
 
+            boolean hayResultados = false;
+
             while (rs.next()) {
-				 System.out.println("-----------------------------------------------");
+
+                hayResultados = true;
+
+                System.out.println("-----------------------------------------------");
 
                 System.out.println("ID Reserva: " +
                     rs.getInt("ID_Reserva"));
@@ -102,31 +118,43 @@ public class ReservaClienteDAO{
                 System.out.println("Horario: " +
                     rs.getString("Horario_Tour"));
 
+                System.out.println("Guía asignado: " +
+                    rs.getString("Nombre_Guia") + " " +
+                    rs.getString("Apellido_Guia"));
+
                 System.out.println("Estado de la reserva: " +
                     rs.getString("Estado_Reserva"));
+            }
 
-				
-            } 
-            
+            if (!hayResultados) {
+                System.out.println("No hay reservas registradas.");
+            }
+
+            System.out.println("-----------------------------------------------");
+
         } catch (SQLException e) {
-            System.err.println("Error al Consultar Turistas");
-            e.printStackTrace();
+
+            System.err.println("Error al consultar las reservas: " +
+                e.getMessage());
+
+        } finally {
+
+            try {
+
+                // Cerrar ResultSet
+                if (rs != null) rs.close();
+
+                // Cerrar sentencia
+                if (sentencia != null) sentencia.close();
+
+                // Cerrar conexión
+                if (con != null) con.close();
+
+            } catch (SQLException e) {
+
+                System.err.println("Error al cerrar conexión: " +
+                    e.getMessage());
+            }
         }
-        finally
-        {
-        	try
-        	{
-        		// Cierra el ResultSet
-        		if (rs!= null) rs.close();
-        		// Cierra la sentencia
-        		if (sentencia!= null) sentencia.close();
-        		// Cierra la conexion
-        		if (con != null) con.close();
-        		
-        	} catch (SQLException e)
-        	{
-        		System.err.println("Error al cerrar conexion");
-        	}
-        }
-	}
+    }
 }
